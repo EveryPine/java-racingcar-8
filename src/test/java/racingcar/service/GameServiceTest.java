@@ -50,4 +50,27 @@ class GameServiceTest {
                 .usingRecursiveComparison()
                 .isEqualTo(expected);
     }
+
+    @Test
+    void validateAttemptCount_Normal_ExceptionDoesNotThrown() {
+        // given
+        String input = "10";
+
+        // when
+
+        // then
+        assertThatCode(() -> gameService.validateAttemptCount(input))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    void validateAttemptCount_WrongInput_ExceptionThrown() {
+        // given
+        String input = "-20";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> gameService.validateAttemptCount(input));
+    }
 }

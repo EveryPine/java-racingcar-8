@@ -1,6 +1,7 @@
 package racingcar.controller;
 
 import racingcar.model.Car;
+import racingcar.model.GameState;
 import racingcar.service.GameService;
 import racingcar.view.InputView;
 
@@ -14,6 +15,10 @@ public class GameController {
         String carNameInput = InputView.getCarName();
         service.validateCarNameInput(carNameInput);
         List<Car> cars = service.setCars(carNameInput);
+
+        String attemptCountInput = InputView.getAttemptCount();
+        service.validateAttemptCount(attemptCountInput);
+        GameState gameState = new GameState(Integer.parseInt(attemptCountInput), cars);
 
     }
 }
