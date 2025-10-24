@@ -5,6 +5,7 @@ import racingcar.model.GameData;
 import racingcar.service.GameService;
 import racingcar.util.StandardRandomUtils;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,10 @@ public class GameController {
         List<List<Integer>> history = new ArrayList<>();
         GameData gameData = new GameData(Integer.parseInt(attemptCountInput), cars, history);
         service.calculateGameResult(new StandardRandomUtils(), gameData);
+
         List<Car> winners = service.calculateWinners(gameData);
+
+        OutputView.printGameResult(gameData);
+        OutputView.printWinners(winners);
     }
 }
