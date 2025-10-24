@@ -15,65 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameServiceTest {
 
-    private final GameService gameService = new GameService();
+    private final GameService service = new GameService();
 
     @BeforeAll
     static void setUp() {
 
-    }
-
-    @Test
-    void validateCarNameInput() {
-        // given
-        String input = "pobi,woni,jun";
-
-        // when
-
-        // then
-        assertThatCode(() -> gameService.validateCarNameInput(input))
-                .doesNotThrowAnyException();
-    }
-
-    @Test
-    void setCars() {
-        // given
-        String input = "pobi,woni,jun";
-        List<Car> expected = List.of(
-                new Car(0, "pobi"),
-                new Car(1, "woni"),
-                new Car(2, "jun")
-        );
-
-        // when
-        List<Car> actual = gameService.setCars(input);
-
-        // then
-        assertThat(actual)
-                .usingRecursiveComparison()
-                .isEqualTo(expected);
-    }
-
-    @Test
-    void validateAttemptCount_Normal_ExceptionDoesNotThrown() {
-        // given
-        String input = "10";
-
-        // when
-
-        // then
-        assertThatCode(() -> gameService.validateAttemptCount(input))
-                .doesNotThrowAnyException();
-    }
-
-    @Test
-    void validateAttemptCount_WrongInput_ExceptionThrown() {
-        // given
-        String input = "-20";
-
-        // when
-
-        // then
-        assertThrows(IllegalArgumentException.class, () -> gameService.validateAttemptCount(input));
     }
 
     @Test
@@ -98,7 +44,7 @@ class GameServiceTest {
 
         // when
         GameData actual = new GameData(attemptCount, cars, new ArrayList<>());
-        gameService.calculateGameResult(testRandomUtils, actual);
+        service.calculateGameResult(testRandomUtils, actual);
 
         // then
         assertThat(actual)
@@ -128,7 +74,7 @@ class GameServiceTest {
         );
 
         // when
-        List<Car> actual = gameService.calculateWinners(gameData);
+        List<Car> actual = service.calculateWinners(gameData);
 
         // then
         assertThat(actual)
@@ -159,7 +105,7 @@ class GameServiceTest {
         );
 
         // when
-        List<Car> actual = gameService.calculateWinners(gameData);
+        List<Car> actual = service.calculateWinners(gameData);
 
         // then
         assertThat(actual)

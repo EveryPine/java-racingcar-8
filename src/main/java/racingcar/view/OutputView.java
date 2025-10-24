@@ -43,11 +43,7 @@ public class OutputView {
             String name = car.getName();
             int moveCount = roundResult.get(carIndex);
 
-            System.out.print(name + " : ");
-            for (int i = 0; i < moveCount; i++) {
-                System.out.print("-");
-            }
-            System.out.println();
+            System.out.println(name + " : " + "-".repeat(moveCount));
         }
     }
 }

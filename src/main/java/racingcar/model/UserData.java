@@ -1,0 +1,31 @@
+package racingcar.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserData {
+
+    private int attemptCount;
+    private List<Car> cars;
+
+    public UserData() {
+        attemptCount = 0;
+        cars = new ArrayList<>();
+    }
+
+    public void setAttemptCount(int attemptCount) {
+        this.attemptCount = attemptCount;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
+    public int getAttemptCount() {
+        return attemptCount;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+}
