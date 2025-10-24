@@ -38,4 +38,26 @@ public class GameService {
             throw new IllegalArgumentException("입력된 시도 횟수가 유효하지 않습니다.");
         }
     }
+
+    public void calculateGameResult(RandomUtils randomUtils, GameData gameData) {
+        int attemptCount = gameData.getAttemptCount();
+        List<Car> cars = gameData.getCars();
+
+        for (int attempt = 0; attempt < attemptCount; attempt++) {
+            List<Integer> roundResult = getRoundResult(randomUtils, cars);
+            gameData.updateHistory(roundResult);
+        }
+    }
+
+    private List<Integer> getRoundResult(RandomUtils randomUtils, List<Car> cars) {
+        List<Integer> roundResult = new ArrayList<>();
+
+        for (int carIndex = 0; carIndex < cars.size(); carIndex++) {
+            Car car = cars.get(carIndex);
+            car.move(randomUtils.getRandomInteger());
+            roundResult.add(car.getPosition());
+        }
+
+        return roundResult;
+    }
 }
