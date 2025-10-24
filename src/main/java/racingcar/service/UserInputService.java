@@ -1,7 +1,7 @@
 package racingcar.service;
 
 import racingcar.model.Car;
-import racingcar.model.UserData;
+import racingcar.model.User;
 import racingcar.parser.CarNameParser;
 import racingcar.validator.AttemptCountValidator;
 import racingcar.validator.CarNameValidator;
@@ -11,13 +11,13 @@ import java.util.stream.IntStream;
 
 public class UserInputService {
 
-    private final UserData userData;
+    private final User user;
     private final CarNameValidator carNameValidator = new CarNameValidator();
     private final AttemptCountValidator attemptCountValidator = new AttemptCountValidator();
     private final CarNameParser carNameParser = new CarNameParser();
 
-    public UserInputService(UserData userData) {
-        this.userData = userData;
+    public UserInputService(User user) {
+        this.user = user;
     }
 
     public void validateCarNameInput(String input) {
@@ -34,7 +34,7 @@ public class UserInputService {
                 .mapToObj(i -> new Car(i, carNames.get(i)))
                 .toList();
 
-        userData.setCars(cars);
+        user.setCars(cars);
     }
 
     public void validateAttemptCount(String input) {
@@ -48,6 +48,6 @@ public class UserInputService {
     public void setAttemptCount(String input) {
         int attemptCount = Integer.parseInt(input);
 
-        userData.setAttemptCount(attemptCount);
+        user.setAttemptCount(attemptCount);
     }
 }

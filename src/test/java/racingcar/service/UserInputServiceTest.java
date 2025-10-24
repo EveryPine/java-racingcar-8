@@ -3,7 +3,7 @@ package racingcar.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import racingcar.model.Car;
-import racingcar.model.UserData;
+import racingcar.model.User;
 
 import java.util.List;
 
@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserInputServiceTest {
 
-    private UserData userData;
+    private User user;
     private UserInputService service;
 
     @BeforeEach
     void setUp() {
-        userData = new UserData();
-        service = new UserInputService(userData);
+        user = new User();
+        service = new UserInputService(user);
     }
 
     @Test
@@ -46,7 +46,7 @@ class UserInputServiceTest {
 
         // when
         service.setCars(input);
-        List<Car> actual = userData.getCars();
+        List<Car> actual = user.getCars();
 
         // then
         assertThat(actual)

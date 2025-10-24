@@ -1,7 +1,7 @@
 package racingcar.view;
 
 import racingcar.model.Car;
-import racingcar.model.GameData;
+import racingcar.model.Game;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ public class OutputView {
         System.out.println("시도할 횟수는 몇 회인가요?");
     }
 
-    public static void printGameResult(GameData gameData) {
-        int attemptCount = gameData.getAttemptCount();
-        List<Car> cars = gameData.getCars();
-        List<List<Integer>> history = gameData.getHistory();
+    public static void printGameResult(Game game) {
+        int attemptCount = game.getAttemptCount();
+        List<Car> cars = game.getCars();
+        List<List<Integer>> history = game.getHistory();
 
         System.out.println("\n실행 결과");
         for (int attempt = 0; attempt < attemptCount; attempt++) {

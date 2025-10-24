@@ -3,12 +3,12 @@ package racingcar.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserData {
+public class User {
 
     private int attemptCount;
     private List<Car> cars;
 
-    public UserData() {
+    public User() {
         attemptCount = 0;
         cars = new ArrayList<>();
     }

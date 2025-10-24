@@ -2,13 +2,13 @@ package racingcar.model;
 
 import java.util.List;
 
-public class GameData {
+public class Game {
 
     private int attemptCount;
     private List<Car> cars;
     private List<List<Integer>> history;
 
-    public GameData(int attemptCount, List<Car> cars, List<List<Integer>> history) {
+    public Game(int attemptCount, List<Car> cars, List<List<Integer>> history) {
         this.attemptCount = attemptCount;
         this.cars = cars;
         this.history = history;

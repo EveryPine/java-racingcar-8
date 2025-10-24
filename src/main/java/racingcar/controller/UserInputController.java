@@ -1,6 +1,6 @@
 package racingcar.controller;
 
-import racingcar.model.UserData;
+import racingcar.model.User;
 import racingcar.service.UserInputService;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -9,8 +9,8 @@ public class UserInputController {
 
     private final UserInputService service;
 
-    public UserInputController(UserData userData) {
-        this.service = new UserInputService(userData);
+    public UserInputController(User user) {
+        this.service = new UserInputService(user);
     }
 
     public void run() {

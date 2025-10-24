@@ -3,15 +3,13 @@ package racingcar.service;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import racingcar.model.Car;
-import racingcar.model.GameData;
+import racingcar.model.Game;
 import racingcar.util.TestRandomUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameServiceTest {
 
@@ -40,10 +38,10 @@ class GameServiceTest {
                 List.of(4, 4, 4),
                 List.of(5, 5, 5)
         );
-        GameData expected = new GameData(attemptCount, cars, expectedHistory);
+        Game expected = new Game(attemptCount, cars, expectedHistory);
 
         // when
-        GameData actual = new GameData(attemptCount, cars, new ArrayList<>());
+        Game actual = new Game(attemptCount, cars, new ArrayList<>());
         service.calculateGameResult(testRandomUtils, actual);
 
         // then
@@ -68,13 +66,13 @@ class GameServiceTest {
                 List.of(4, 3, 4),
                 List.of(5, 4, 4)
         );
-        GameData gameData = new GameData(attemptCount, cars, history);
+        Game game = new Game(attemptCount, cars, history);
         List<Car> expected = List.of(
                 new Car(0, "pobi", 5)
         );
 
         // when
-        List<Car> actual = service.calculateWinners(gameData);
+        List<Car> actual = service.calculateWinners(game);
 
         // then
         assertThat(actual)
@@ -98,14 +96,14 @@ class GameServiceTest {
                 List.of(4, 3, 4),
                 List.of(5, 4, 5)
         );
-        GameData gameData = new GameData(attemptCount, cars, history);
+        Game game = new Game(attemptCount, cars, history);
         List<Car> expected = List.of(
                 new Car(0, "pobi", 5),
                 new Car(2, "jun", 5)
         );
 
         // when
-        List<Car> actual = service.calculateWinners(gameData);
+        List<Car> actual = service.calculateWinners(game);
 
         // then
         assertThat(actual)

@@ -1,7 +1,7 @@
 package racingcar.service;
 
 import racingcar.model.Car;
-import racingcar.model.GameData;
+import racingcar.model.Game;
 import racingcar.util.RandomUtils;
 
 import java.util.ArrayList;
@@ -9,24 +9,24 @@ import java.util.List;
 
 public class GameService {
 
-    public void calculateGameResult(RandomUtils randomUtils, GameData gameData) {
-        int attemptCount = gameData.getAttemptCount();
-        List<Car> cars = gameData.getCars();
+    public void calculateGameResult(RandomUtils randomUtils, Game game) {
+        int attemptCount = game.getAttemptCount();
+        List<Car> cars = game.getCars();
 
         for (int attempt = 0; attempt < attemptCount; attempt++) {
             List<Integer> roundResult = getRoundResult(randomUtils, cars);
-            gameData.updateHistory(roundResult);
+            game.updateHistory(roundResult);
         }
     }
 
-    public List<Car> calculateWinners(GameData gameData) {
+    public List<Car> calculateWinners(Game game) {
         List<Car> winners = new ArrayList<>();
-        int maxMoveCount = gameData.getHistory()
+        int maxMoveCount = game.getHistory()
                 .getLast().stream()
                 .mapToInt(x -> x)
                 .max().orElse(0);
 
-        for (Car car: gameData.getCars()) {
+        for (Car car: game.getCars()) {
             if (car.getPosition() == maxMoveCount) {
                 winners.add(car);
             }
