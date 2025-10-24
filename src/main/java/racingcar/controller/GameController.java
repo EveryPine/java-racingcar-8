@@ -24,5 +24,6 @@ public class GameController {
         List<List<Integer>> history = new ArrayList<>();
         GameData gameData = new GameData(Integer.parseInt(attemptCountInput), cars, history);
         service.calculateGameResult(new StandardRandomUtils(), gameData);
+        List<Car> winners = service.calculateWinners(gameData);
     }
 }

@@ -1,10 +1,13 @@
 package racingcar.service;
 
 import racingcar.model.Car;
+import racingcar.model.GameData;
 import racingcar.parser.CarNameParser;
+import racingcar.util.RandomUtils;
 import racingcar.validator.AttemptCountValidator;
 import racingcar.validator.CarNameValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,6 +50,22 @@ public class GameService {
             List<Integer> roundResult = getRoundResult(randomUtils, cars);
             gameData.updateHistory(roundResult);
         }
+    }
+
+    public List<Car> calculateWinners(GameData gameData) {
+        List<Car> winners = new ArrayList<>();
+        int maxMoveCount = gameData.getHistory()
+                .getLast().stream()
+                .mapToInt(x -> x)
+                .max().orElse(0);
+
+        for (Car car: gameData.getCars()) {
+            if (car.getPosition() == maxMoveCount) {
+                winners.add(car);
+            }
+        }
+
+        return winners;
     }
 
     private List<Integer> getRoundResult(RandomUtils randomUtils, List<Car> cars) {
