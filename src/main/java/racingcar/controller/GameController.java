@@ -15,11 +15,13 @@ public class GameController {
     private final GameService service = new GameService();
 
     public void run() {
-        String carNameInput = InputView.getCarName();
+        OutputView.printCarNameInputMessage();
+        String carNameInput = InputView.getInput();
         service.validateCarNameInput(carNameInput);
         List<Car> cars = service.setCars(carNameInput);
 
-        String attemptCountInput = InputView.getAttemptCount();
+        OutputView.printAttemptCountInputMessage();
+        String attemptCountInput = InputView.getInput();
         service.validateAttemptCount(attemptCountInput);
 
         List<List<Integer>> history = new ArrayList<>();
