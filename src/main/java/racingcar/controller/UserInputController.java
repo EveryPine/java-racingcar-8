@@ -14,11 +14,13 @@ public class UserInputController {
     }
 
     public void run() {
+        // TODO 1: 경주할 자동차 이름을 입력받는다
         OutputView.printCarNameInputMessage();
         String carNameInput = InputView.getInput();
         service.validateCarNameInput(carNameInput);
         service.setCars(carNameInput);
 
+        // TODO 2: 시도 횟수를 입력받는다
         OutputView.printAttemptCountInputMessage();
         String attemptCountInput = InputView.getInput();
         service.validateAttemptCount(attemptCountInput);
