@@ -2,6 +2,7 @@ package racingcar.view;
 
 import racingcar.model.Car;
 import racingcar.model.Game;
+import racingcar.model.User;
 
 import java.util.List;
 
@@ -16,8 +17,9 @@ public class OutputView {
     }
 
     public static void printGameResult(Game game) {
-        int attemptCount = game.getAttemptCount();
-        List<Car> cars = game.getCars();
+        User user = game.getUser();
+        int attemptCount = user.getAttemptCount();
+        List<Car> cars = user.getCars();
         List<List<Integer>> history = game.getHistory();
 
         System.out.println("\n실행 결과");

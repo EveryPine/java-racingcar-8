@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import racingcar.model.Car;
 import racingcar.model.Game;
+import racingcar.model.User;
 import racingcar.util.TestRandomUtils;
 
 import java.util.ArrayList;
@@ -14,11 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GameServiceTest {
 
     private final GameService service = new GameService();
-
-    @BeforeAll
-    static void setUp() {
-
-    }
 
     @Test
     void calculateGameResult_Normal_Successful() {
@@ -31,6 +27,7 @@ class GameServiceTest {
                 new Car(1, "woni"),
                 new Car(2, "jun")
         );
+        User user = new User(attemptCount, cars);
         List<List<Integer>> expectedHistory = List.of(
                 List.of(1, 1, 1),
                 List.of(2, 2, 2),
@@ -38,10 +35,10 @@ class GameServiceTest {
                 List.of(4, 4, 4),
                 List.of(5, 5, 5)
         );
-        Game expected = new Game(attemptCount, cars, expectedHistory);
+        Game expected = new Game(user, expectedHistory);
 
         // when
-        Game actual = new Game(attemptCount, cars, new ArrayList<>());
+        Game actual = new Game(user, new ArrayList<>());
         service.calculateGameResult(testRandomUtils, actual);
 
         // then
@@ -66,13 +63,15 @@ class GameServiceTest {
                 List.of(4, 3, 4),
                 List.of(5, 4, 4)
         );
-        Game game = new Game(attemptCount, cars, history);
+        User user = new User(attemptCount, cars);
+        Game game = new Game(user, history);
         List<Car> expected = List.of(
                 new Car(0, "pobi", 5)
         );
 
         // when
-        List<Car> actual = service.calculateWinners(game);
+        service.calculateWinners(game);
+        List<Car> actual = game.getWinners();
 
         // then
         assertThat(actual)
@@ -96,14 +95,16 @@ class GameServiceTest {
                 List.of(4, 3, 4),
                 List.of(5, 4, 5)
         );
-        Game game = new Game(attemptCount, cars, history);
+        User user = new User(attemptCount, cars);
+        Game game = new Game(user, history);
         List<Car> expected = List.of(
                 new Car(0, "pobi", 5),
                 new Car(2, "jun", 5)
         );
 
         // when
-        List<Car> actual = service.calculateWinners(game);
+        service.calculateWinners(game);
+        List<Car> actual = game.getWinners();
 
         // then
         assertThat(actual)

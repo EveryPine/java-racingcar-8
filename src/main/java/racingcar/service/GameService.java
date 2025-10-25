@@ -2,6 +2,7 @@ package racingcar.service;
 
 import racingcar.model.Car;
 import racingcar.model.Game;
+import racingcar.model.User;
 import racingcar.util.RandomUtils;
 
 import java.util.ArrayList;
@@ -10,8 +11,9 @@ import java.util.List;
 public class GameService {
 
     public void calculateGameResult(RandomUtils randomUtils, Game game) {
-        int attemptCount = game.getAttemptCount();
-        List<Car> cars = game.getCars();
+        User user = game.getUser();
+        int attemptCount = user.getAttemptCount();
+        List<Car> cars = user.getCars();
 
         for (int attempt = 0; attempt < attemptCount; attempt++) {
             List<Integer> roundResult = getRoundResult(randomUtils, cars);
@@ -19,20 +21,21 @@ public class GameService {
         }
     }
 
-    public List<Car> calculateWinners(Game game) {
+    public void calculateWinners(Game game) {
+        List<Car> cars = game.getUser().getCars();
         List<Car> winners = new ArrayList<>();
         int maxMoveCount = game.getHistory()
                 .getLast().stream()
                 .mapToInt(x -> x)
                 .max().orElse(0);
 
-        for (Car car: game.getCars()) {
+        for (Car car: cars) {
             if (car.getPosition() == maxMoveCount) {
                 winners.add(car);
             }
         }
 
-        return winners;
+        game.setWinners(winners);
     }
 
     private List<Integer> getRoundResult(RandomUtils randomUtils, List<Car> cars) {

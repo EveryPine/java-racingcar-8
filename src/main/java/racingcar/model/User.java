@@ -13,6 +13,11 @@ public class User {
         cars = new ArrayList<>();
     }
 
+    public User(int attemptCount, List<Car> cars) {
+        this.attemptCount = attemptCount;
+        this.cars = cars;
+    }
+
     public void setAttemptCount(int attemptCount) {
         this.attemptCount = attemptCount;
     }

@@ -1,29 +1,34 @@
 package racingcar.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
-    private int attemptCount;
-    private List<Car> cars;
+    private User user;
     private List<List<Integer>> history;
+    private List<Car> winners;
 
-    public Game(int attemptCount, List<Car> cars, List<List<Integer>> history) {
-        this.attemptCount = attemptCount;
-        this.cars = cars;
+    public Game(User user, List<List<Integer>> history) {
+        this.user = user;
         this.history = history;
+        this.winners = new ArrayList<>();
     }
 
-    public int getAttemptCount() {
-        return attemptCount;
+    public void setWinners(List<Car> winners) {
+        this.winners = winners;
     }
 
-    public List<Car> getCars() {
-        return cars;
+    public User getUser() {
+        return user;
     }
 
     public List<List<Integer>> getHistory() {
         return history;
+    }
+
+    public List<Car> getWinners() {
+        return winners;
     }
 
     public void updateHistory(List<Integer> roundResult) {

@@ -1,6 +1,5 @@
 package racingcar.controller;
 
-import racingcar.model.Car;
 import racingcar.model.Game;
 import racingcar.model.User;
 import racingcar.service.GameService;
@@ -8,7 +7,6 @@ import racingcar.util.StandardRandomUtils;
 import racingcar.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameController {
 
@@ -21,12 +19,11 @@ public class GameController {
     }
 
     public void run() {
-        Game game = new Game(user.getAttemptCount(), user.getCars(), new ArrayList<>());
+        Game game = new Game(user, new ArrayList<>());
         service.calculateGameResult(new StandardRandomUtils(), game);
-
-        List<Car> winners = service.calculateWinners(game);
+        service.calculateWinners(game);
 
         OutputView.printGameResult(game);
-        OutputView.printWinners(winners);
+        OutputView.printWinners(game.getWinners());
     }
 }
