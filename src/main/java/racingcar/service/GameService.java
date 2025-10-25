@@ -23,15 +23,15 @@ public class GameService {
 
     public void calculateWinners(Game game) {
         List<Car> cars = game.getUser().getCars();
-                .mapToInt(x -> x)
+        List<Integer> gameResult = game.getHistory().getLast();
+
+        // 게임 결과에서 최대 이동 횟수를 가진 자동차만 선별
+        int maxMoveCount = gameResult.stream()
                 .mapToInt(moveCount -> moveCount)
                 .max().orElse(0);
-
-        for (Car car: cars) {
-            if (car.getPosition() == maxMoveCount) {
-                winners.add(car);
-            }
-        }
+        List<Car> winners = cars.stream()
+                .filter(car -> car.getPosition() == maxMoveCount)
+                .toList();
 
         game.setWinners(winners);
     }
