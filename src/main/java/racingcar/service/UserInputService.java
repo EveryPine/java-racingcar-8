@@ -30,8 +30,9 @@ public class UserInputService {
 
     public void setCars(String input) {
         List<String> carNames = carNameParser.parse(input);
-        List<Car> cars = IntStream.range(0, carNames.size())
-                .mapToObj(i -> new Car(i, carNames.get(i)))
+        int carCount = carNames.size();
+        List<Car> cars = IntStream.range(0, carCount)
+                .mapToObj(carIndex -> new Car(carIndex, carNames.get(carIndex)))
                 .toList();
 
         user.setCars(cars);

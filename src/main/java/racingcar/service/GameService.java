@@ -23,10 +23,8 @@ public class GameService {
 
     public void calculateWinners(Game game) {
         List<Car> cars = game.getUser().getCars();
-        List<Car> winners = new ArrayList<>();
-        int maxMoveCount = game.getHistory()
-                .getLast().stream()
                 .mapToInt(x -> x)
+                .mapToInt(moveCount -> moveCount)
                 .max().orElse(0);
 
         for (Car car: cars) {

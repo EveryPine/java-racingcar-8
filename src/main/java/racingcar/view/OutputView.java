@@ -32,9 +32,10 @@ public class OutputView {
     public static void printWinners(List<Car> winners) {
         List<String> winnerNames = winners.stream()
                 .map(Car::getName).toList();
-        String outputString = String.join(", ", winnerNames);
+        String joiningDelimiter = ", ";
+        String joinedWinners = String.join(joiningDelimiter, winnerNames);
 
-        System.out.print("최종 우승자 : " + outputString);
+        System.out.print("최종 우승자 : " + joinedWinners);
     }
 
     private static void printRoundResult(List<Car> cars, List<Integer> roundResult) {
@@ -44,8 +45,9 @@ public class OutputView {
             Car car = cars.get(carIndex);
             String name = car.getName();
             int moveCount = roundResult.get(carIndex);
+            String moveDistance = "-".repeat(moveCount);
 
-            System.out.println(name + " : " + "-".repeat(moveCount));
+            System.out.println(name + " : " + moveDistance);
         }
     }
 }
