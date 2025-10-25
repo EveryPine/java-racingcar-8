@@ -1,7 +1,9 @@
 package racingcar.validator;
 
 import org.junit.jupiter.api.Test;
+import racingcar.exception.ErrorCode;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AttemptCountValidatorTest {
@@ -12,51 +14,59 @@ class AttemptCountValidatorTest {
     void validate_Normal_True() {
         // given
         String input = "5";
-        boolean expected = true;
+        ValidationResult expected = ValidationResult.success();
 
         // when
-        boolean actual = attemptCountValidator.validate(input);
+        ValidationResult actual = attemptCountValidator.validate(input);
 
         // then
-        assertEquals(expected, actual);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
     }
 
     @Test
     void validate_WrongFormatInput_False() {
         // given
         String input = "5#";
-        boolean expected = false;
+        ValidationResult expected = ValidationResult.failure(ErrorCode.ATTEMPTCOUNT_INVALID_FORMAT);
 
         // when
-        boolean actual = attemptCountValidator.validate(input);
+        ValidationResult actual = attemptCountValidator.validate(input);
 
         // then
-        assertEquals(expected, actual);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
     }
 
     @Test
     void validate_LessThanMinAttemptCount_False() {
         // given
         String input = "-1";
-        boolean expected = false;
+        ValidationResult expected = ValidationResult.failure(ErrorCode.ATTEMPTCOUNT_INVALID_COUNT);
 
         // when
-        boolean actual = attemptCountValidator.validate(input);
+        ValidationResult actual = attemptCountValidator.validate(input);
 
         // then
-        assertEquals(expected, actual);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
     }
 
     @Test
     void validate_GreaterThanMaxAttemptCount_False() {
         // given
         String input = "200";
-        boolean expected = false;
+        ValidationResult expected = ValidationResult.failure(ErrorCode.ATTEMPTCOUNT_INVALID_COUNT);
 
         // when
-        boolean actual = attemptCountValidator.validate(input);
+        ValidationResult actual = attemptCountValidator.validate(input);
 
         // then
-        assertEquals(expected, actual);
+        assertThat(actual)
+                .usingRecursiveComparison()
+                .isEqualTo(expected);
     }
 }

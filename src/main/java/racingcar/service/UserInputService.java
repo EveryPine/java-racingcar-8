@@ -5,6 +5,7 @@ import racingcar.model.User;
 import racingcar.parser.CarNameParser;
 import racingcar.validator.AttemptCountValidator;
 import racingcar.validator.CarNameValidator;
+import racingcar.validator.ValidationResult;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -21,10 +22,10 @@ public class UserInputService {
     }
 
     public void validateCarNameInput(String input) {
-        boolean isValid = carNameValidator.validate(input);
+        ValidationResult validationResult = carNameValidator.validate(input);
 
-        if (!isValid) {
-            throw new IllegalArgumentException("자동차 이름 입력이 유효하지 않습니다.");
+        if (validationResult.isFailure()) {
+            throw new IllegalArgumentException(validationResult.getErrorCode().getMessage());
         }
     }
 
@@ -39,10 +40,10 @@ public class UserInputService {
     }
 
     public void validateAttemptCount(String input) {
-        boolean isValid = attemptCountValidator.validate(input);
+        ValidationResult validationResult = attemptCountValidator.validate(input);
 
-        if (!isValid) {
-            throw new IllegalArgumentException("입력된 시도 횟수가 유효하지 않습니다.");
+        if (validationResult.isFailure()) {
+            throw new IllegalArgumentException(validationResult.getErrorCode().getMessage());
         }
     }
 
